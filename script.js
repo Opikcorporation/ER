@@ -54,7 +54,7 @@ const questions = [
         text: "On y est presque ! C'est quoi ton nom et prénom ?",
         name: "full_name",
         type: "text",
-        placeholder: "Ex: Sophie Robert",
+        placeholder: "Ex: Esther Rizzo",
         validation: "required"
     },
     {
@@ -68,7 +68,7 @@ const questions = [
         text: "Et ton adresse e-mail ? (pour être sûre que tu reçoives bien tout).",
         name: "email",
         type: "email",
-        placeholder: "sophie@exemple.com",
+        placeholder: "esther@exemple.com",
         validation: "email"
     },
     {
@@ -95,11 +95,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     openButton.addEventListener('click', () => {
         chatModal.style.display = 'flex';
+        document.body.classList.add('modal-open'); // <-- MODIFICATION : Bloque le scroll
         startChat();
     });
 
     closeButton.addEventListener('click', () => {
         chatModal.style.display = 'none';
+        document.body.classList.remove('modal-open'); // <-- MODIFICATION : Réactive le scroll
         resetChat(); // Réinitialise le chat si on ferme
     });
 });
@@ -137,8 +139,9 @@ function askQuestion(index) {
     
     const messageBubble = document.createElement('div');
     messageBubble.classList.add('message');
+    // MISE À JOUR ICI
     messageBubble.innerHTML = `
-        <img src="https://i.imgur.com/G1fWXfK.png" alt="Sophie" class="avatar">
+        <img src="image_1.jpg" alt="Esther Rizzo" class="avatar">
         <div class="bubble">${question.text}</div>
     `;
     chatBody.appendChild(messageBubble);
@@ -306,8 +309,9 @@ function showGoogleCalendar() {
     googleIntro.classList.add('message');
     
     // C'est ce texte qui est crucial
+    // MISE À JOUR ICI
     googleIntro.innerHTML = `
-        <img src="https://i.imgur.com/G1fWXfK.png" alt="Sophie" class="avatar">
+        <img src="image_1.jpg" alt="Esther Rizzo" class="avatar">
         <div class="bubble">
             YES ! Profil accepté ! 🚀 Félicitations, tu as fait le plus dur.
             <br><br>
