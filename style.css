@@ -31,6 +31,11 @@ body {
     font-weight: 400;
 }
 
+/* NOUVEAU : Classe pour bloquer le scroll */
+body.modal-open {
+    overflow: hidden;
+}
+
 .container {
     max-width: 900px;
     margin: 0 auto;
@@ -108,7 +113,7 @@ h1 strong { color: var(--color-dark); }
 
 /* --- 6. POP-UP DE CHAT --- */
 
-/* C'est le style pour ordinateur : centré, comme un pop-up normal */
+/* Style plein écran (corrigé pour mobile) */
 .chat-modal {
     display: none; 
     position: fixed;
@@ -116,18 +121,20 @@ h1 strong { color: var(--color-dark); }
     font-family: var(--font-body);
     flex-direction: column;
     
-    /* Centré sur ordinateur */
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 90vw; /* 90% de la largeur */
-    max-width: 440px; /* Largeur max type mobile */
-    max-height: 90vh; /* 90% de la hauteur max */
+    /* Plein écran */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
     
     background-color: var(--color-chat-bg); /* FOND BLANC */
-    border-radius: 16px;
-    box-shadow: 0 5px 30px rgba(0,0,0,0.15);
-    overflow: hidden; /* Important */
+    
+    /* Annule les styles "carte" d'ordinateur */
+    border-radius: 0;
+    box-shadow: none;
+    max-width: none;
+    max-height: none;
+    transform: none;
 }
 
 .chat-header {
@@ -284,12 +291,19 @@ h1 strong { color: var(--color-dark); }
 /* --- Styles pour le chargement et Agenda --- */
 .message.system {
     max-width: 100%;
-    text-align: center;
+    /* text-align: center; -- Remplacé par Flexbox */
     font-weight: 600;
     color: var(--color-text-secondary);
+    
+    /* MODIFICATION 1 : Centrage parfait */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .message.system .fa-spinner {
     animation: fa-spin 1.5s linear infinite;
+    /* MODIFICATION 2 : Espace */
+    margin-right: 10px;
 }
 .message.system.success {
     color: var(--color-chat-success);
@@ -306,25 +320,18 @@ h1 strong { color: var(--color-dark); }
     .capture-box h2 { font-size: 1.1rem; }
 }
 
-@media (max-width: 480px) {
-    .top-bar { padding: 6px 10px; gap: 10px; }
-    h1 { font-size: 1.5rem; }
-    .advantages-list { flex-direction: column; align-items: stretch; gap: 10px; }
-    .advantage-point { flex-basis: auto; box-sizing: border-box; }
-
-    /* --- CORRECTION DU POP-UP MOBILE --- */
+/* Sur ordinateur (plus de 480px), on remet le style "carte" */
+@media (min-width: 481px) {
     .chat-modal {
-        /* On ne centre plus, on ancre en haut */
-        top: 15px; /* Marge en haut (réduite) */
-        left: 15px; /* Marge latérale (augmentée) */
-        right: 15px; /* Marge latérale (augmentée) */
-        transform: none; /* Annule le centrage */
-
-        /* On ne s'ancre PAS en bas */
-        /* On définit une HAUTEUR MAXIMALE */
-        max-height: 80vh; /* Laisse 20% d'espace en bas (réduit) */
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 90vw;
+        max-width: 440px;
+        height: auto; /* Hauteur auto sur ordi */
+        max-height: 90vh; /* Hauteur max */
         
-        width: auto; /* La largeur est gérée par left/right */
-        max-width: none; /* Annule la largeur max d'ordinateur */
+        border-radius: 16px;
+        box-shadow: 0 5px 30px rgba(0,0,0,0.15);
     }
 }
