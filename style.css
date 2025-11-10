@@ -31,7 +31,7 @@ body {
     font-weight: 400;
 }
 
-/* NOUVEAU : Classe pour bloquer le scroll */
+/* Classe pour bloquer le scroll */
 body.modal-open {
     overflow: hidden;
 }
@@ -113,7 +113,7 @@ h1 strong { color: var(--color-dark); }
 
 /* --- 6. POP-UP DE CHAT --- */
 
-/* Style plein écran (corrigé pour mobile) */
+/* C'est le style pour ordinateur : centré, comme un pop-up normal */
 .chat-modal {
     display: none; 
     position: fixed;
@@ -121,20 +121,18 @@ h1 strong { color: var(--color-dark); }
     font-family: var(--font-body);
     flex-direction: column;
     
-    /* Plein écran */
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
+    /* Centré sur ordinateur */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90vw; /* 90% de la largeur */
+    max-width: 440px; /* Largeur max type mobile */
+    max-height: 90vh; /* 90% de la hauteur max */
     
     background-color: var(--color-chat-bg); /* FOND BLANC */
-    
-    /* Annule les styles "carte" d'ordinateur */
-    border-radius: 0;
-    box-shadow: none;
-    max-width: none;
-    max-height: none;
-    transform: none;
+    border-radius: 16px;
+    box-shadow: 0 5px 30px rgba(0,0,0,0.15);
+    overflow: hidden; /* Important */
 }
 
 .chat-header {
@@ -320,18 +318,30 @@ h1 strong { color: var(--color-dark); }
     .capture-box h2 { font-size: 1.1rem; }
 }
 
-/* Sur ordinateur (plus de 480px), on remet le style "carte" */
-@media (min-width: 481px) {
+@media (max-width: 480px) {
+    .top-bar { padding: 6px 10px; gap: 10px; }
+    h1 { font-size: 1.5rem; }
+    .advantages-list { flex-direction: column; align-items: stretch; gap: 10px; }
+    .advantage-point { flex-basis: auto; box-sizing: border-box; }
+
+    /* --- CORRECTION DU POP-UP MOBILE --- */
+    /* On revient au style "carte flottante" */
     .chat-modal {
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 90vw;
-        max-width: 440px;
-        height: auto; /* Hauteur auto sur ordi */
-        max-height: 90vh; /* Hauteur max */
+        top: 15px; /* Marge en haut (réduite) */
+        left: 15px; /* Marge latérale (augmentée) */
+        right: 15px; /* Marge latérale (augmentée) */
+        transform: none; /* Annule le centrage */
+
+        /* On ne s'ancre PAS en bas */
+        /* On définit une HAUTEUR MAXIMALE */
+        max-height: 80vh; /* Laisse 20% d'espace en bas (réduit) */
+        height: 80vh; /* Taille fixe */
+        
+        width: auto; /* La largeur est gérée par left/right */
+        max-width: none; /* Annule la largeur max d'ordinateur */
         
         border-radius: 16px;
         box-shadow: 0 5px 30px rgba(0,0,0,0.15);
+        overflow: hidden;
     }
 }
