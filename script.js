@@ -246,7 +246,7 @@ function showError(message) {
     }
 }
 
-// --- NOUVELLE SÉQUENCE DE FIN ---
+// --- SÉQUENCE DE FIN (MISE À JOUR) ---
 
 function submitForm() {
     console.log("Données du formulaire prêtes à être soumises :");
@@ -296,27 +296,31 @@ function showSuccess() {
     scrollToBottom();
     
     // Laisse le temps de lire le message
-    setTimeout(showGoogleCalendar, 1500); // MISE À JOUR : Appel de la nouvelle fonction
+    setTimeout(showGoogleCalendar, 1500);
 }
 
-// MISE À JOUR : Renommée de showCalendly en showGoogleCalendar
+// MISE À JOUR : Message final plus persuasif
 function showGoogleCalendar() {
-    // Message d'accompagnement
+    // Message d'accompagnement final
     const googleIntro = document.createElement('div');
     googleIntro.classList.add('message');
+    
+    // C'est ce texte qui est crucial
     googleIntro.innerHTML = `
         <img src="https://i.imgur.com/G1fWXfK.png" alt="Sophie" class="avatar">
-        <div class="bubble">Félicitations ! Tu peux réserver ton rendez-vous directement ici 👇</div>
+        <div class="bubble">
+            YES ! Profil accepté ! 🚀 Félicitations, tu as fait le plus dur.
+            <br><br>
+            J'ai vraiment hâte de discuter de ton projet de vive voix.
+            <br><br>
+            C'est la dernière étape :
+            <a href="https://calendar.app.google/v2gKU8buxz5fyNqq9" target="_blank" rel="noopener noreferrer">
+                Clique ici pour réserver ton appel visio 1-on-1
+            </a>
+            <br><br>
+            (Fais-le maintenant, mon agenda se remplit très vite !)
+        </div>
     `;
     chatBody.appendChild(googleIntro);
-
-    // Embed Google Calendar
-    const googleCalendarEmbed = document.createElement('iframe');
-    googleCalendarEmbed.classList.add('calendly-embed'); // On garde la même classe CSS
-    
-    // ⚠️ MISE À JOUR : Remplacement du lien
-    googleCalendarEmbed.src = "https://calendar.app.google/v2gKU8buxz5fyNqq9"; 
-    
-    chatBody.appendChild(googleCalendarEmbed);
     scrollToBottom();
 }
