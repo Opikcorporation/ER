@@ -232,10 +232,123 @@ h1 strong { color: var(--color-dark); }
     gap: 10px;
 }
 .chat-footer .chat-radio-group button {
-    padding: 10px 20px;
+    /* MODIFICATION 1 : Boutons plus grands */
+    padding: 12px 22px; 
     border: none;
     color: white; /* TEXTE BLANC */
     background: var(--color-chat-user); /* FOND NOIR */
     border-radius: 50px;
     cursor: pointer;
-    font-weight: 60
+    font-weight: 600;
+    font-size: 16px; /* MODIFICATION 2 : Taille anti-zoom */
+    font-family: var(--font-body);
+    transition: all 0.2s ease;
+}
+.chat-footer .chat-radio-group button:hover {
+    opacity: 0.8;
+}
+
+/* Zone pour l'input texte (style N&B) */
+.chat-footer .text-answer-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.chat-footer .chat-input {
+    flex-grow: 1;
+    /* MODIFICATION 3 : Input plus grand */
+    padding: 14px 22px; 
+    border: 1px solid var(--color-chat-receiver-bg); /* Bordure grise */
+    background-color: var(--color-chat-receiver-bg); /* Fond gris */
+    border-radius: 50px;
+    
+    /* CORRECTION BUG ZOOM IPHONE */
+    font-size: 16px; 
+    
+    font-family: var(--font-body);
+}
+.chat-footer .text-send-btn {
+    background-color: var(--color-chat-user); /* BOUTON NOIR */
+    color: white;
+    border: none;
+    border-radius: 50%;
+    /* MODIFICATION 4 : Bouton "envoyer" plus grand */
+    width: 48px;
+    height: 48px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.chat-footer .error-message {
+    color: #D32F2F;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-align: left;
+    margin-top: 8px;
+    display: none;
+}
+
+/* --- Styles pour le chargement et Agenda --- */
+.message.system {
+    max-width: 100%;
+    /* text-align: center; -- Remplacé par Flexbox */
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    
+    /* MODIFICATION 1 : Centrage parfait */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.message.system .fa-spinner {
+    animation: fa-spin 1.5s linear infinite;
+    /* MODIFICATION 2 : Espace */
+    margin-right: 10px;
+}
+.message.system.success {
+    color: var(--color-chat-success);
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+}
+.message.system.success .fa-check-circle {
+    margin-right: 8px;
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 768px) {
+    h1 { font-size: 1.8rem; }
+    .capture-box h2 { font-size: 1.1rem; }
+}
+
+@media (max-width: 480px) {
+    .top-bar { padding: 6px 10px; gap: 10px; }
+    h1 { font-size: 1.5rem; }
+    .advantages-list { flex-direction: column; align-items: stretch; gap: 10px; }
+    .advantage-point { flex-basis: auto; box-sizing: border-box; }
+
+    /* --- CORRECTION DU POP-UP MOBILE --- */
+    /* On revient au style "carte flottante" plus petit, */
+    /* ancré en haut ET en bas pour être stable. */
+    .chat-modal {
+        /* On ancre sur les 4 côtés */
+        top: 15px;    /* Espace en haut */
+        left: 10px;   /* Espace à gauche */
+        right: 10px;  /* Espace à droite */
+        bottom: 15px; /* Espace en bas ( crucial ! ) */
+
+        /* On annule les styles d'ordinateur */
+        transform: none;
+        width: auto;
+        max-width: none;
+        
+        /* La hauteur est gérée par les ancrages top/bottom */
+        height: auto; 
+        max-height: none; 
+        
+        /* Style "carte" */
+        border-radius: 16px;
+        box-shadow: 0 5px 30px rgba(0,0,0,0.15);
+        overflow: hidden;
+    }
+}
