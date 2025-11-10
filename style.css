@@ -15,6 +15,7 @@
     --color-chat-user: var(--color-dark); /* Bulle utilisateur / boutons */
     --color-chat-receiver-bg: #EFEFEF; /* Bulle "Sophie" */
     --color-chat-bg: #FFFFFF; /* Fond du chat */
+    --color-chat-success: #28a745; /* Vert pour succès */
     
     --font-heading: 'Montserrat', sans-serif;
     --font-body: 'Nunito', sans-serif;
@@ -55,7 +56,7 @@ h1 strong { color: var(--color-dark); }
 .play-button { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 60px; color: rgba(255, 255, 255, 0.9); text-shadow: 0 4px 15px rgba(0,0,0,0.3); transition: color 0.2s ease; }
 .video-player:hover .play-button { color: rgba(255, 255, 255, 1); }
 
-/* --- 4. Points d'Avantage (RETOUR AU NOIR PLEIN) --- */
+/* --- 4. Points d'Avantage --- */
 .advantages-list {
     display: flex;
     justify-content: center;
@@ -85,7 +86,7 @@ h1 strong { color: var(--color-dark); }
 .capture-box h2 { font-family: var(--font-heading); font-size: 1.2rem; font-weight: 700; color: var(--color-text-dark); margin: 10px 0; }
 .capture-box p { font-size: 0.85rem; color: var(--color-text-secondary); margin-bottom: 25px; font-weight: 400; }
 
-/* --- Bouton CTA (RETOUR AU NOIR PLEIN) --- */
+/* --- Bouton CTA --- */
 .cta-button {
     font-family: var(--font-heading);
     background-color: var(--color-dark); /* NOIR PLEIN */
@@ -105,7 +106,7 @@ h1 strong { color: var(--color-dark); }
 .cta-button i { margin-right: 10px; }
 
 
-/* --- 6. POP-UP DE CHAT (STYLE FINESSE N&B) --- */
+/* --- 6. POP-UP DE CHAT --- */
 
 .chat-modal {
     display: none; 
@@ -256,6 +257,34 @@ h1 strong { color: var(--color-dark); }
     margin-top: 8px;
     display: none;
 }
+
+/* --- NOUVEAU : Styles pour le chargement et Calendly --- */
+.message.system {
+    max-width: 100%;
+    text-align: center;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+}
+.message.system .fa-spinner {
+    animation: fa-spin 1.5s linear infinite;
+}
+.message.system.success {
+    color: var(--color-chat-success);
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+}
+.message.system.success .fa-check-circle {
+    margin-right: 8px;
+}
+
+.calendly-embed {
+    width: 100%;
+    height: 600px; /* Hauteur standard pour Calendly */
+    border: none;
+    animation: fadeIn 0.5s ease-in-out;
+}
+/* --- FIN DES NOUVEAUX STYLES --- */
+
 
 /* --- Responsive Design --- */
 @media (max-width: 768px) {
