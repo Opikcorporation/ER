@@ -95,13 +95,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     openButton.addEventListener('click', () => {
         chatModal.style.display = 'flex';
-        document.body.classList.add('modal-open'); // <-- MODIFICATION : Bloque le scroll
         startChat();
     });
 
     closeButton.addEventListener('click', () => {
         chatModal.style.display = 'none';
-        document.body.classList.remove('modal-open'); // <-- MODIFICATION : Réactive le scroll
         resetChat(); // Réinitialise le chat si on ferme
     });
 });
