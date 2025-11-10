@@ -175,6 +175,17 @@ h1 strong { color: var(--color-dark); }
     text-align: left;
     font-size: 0.95rem;
     line-height: 1.5;
+    word-break: break-word; /* Pour les longs liens */
+}
+
+/* NOUVEAU: Style pour les liens dans les bulles */
+.message .bubble a {
+    color: var(--color-dark); /* Couleur noire */
+    font-weight: 700;
+    text-decoration: underline;
+}
+.message .bubble a:hover {
+    opacity: 0.7;
 }
 
 /* Message de l'Utilisateur (la réponse) */
@@ -258,7 +269,7 @@ h1 strong { color: var(--color-dark); }
     display: none;
 }
 
-/* --- NOUVEAU : Styles pour le chargement et Calendly --- */
+/* --- Styles pour le chargement et Agenda --- */
 .message.system {
     max-width: 100%;
     text-align: center;
@@ -277,15 +288,6 @@ h1 strong { color: var(--color-dark); }
     margin-right: 8px;
 }
 
-.calendly-embed {
-    width: 100%;
-    height: 600px; /* Hauteur standard pour Calendly */
-    border: none;
-    animation: fadeIn 0.5s ease-in-out;
-}
-/* --- FIN DES NOUVEAUX STYLES --- */
-
-
 /* --- Responsive Design --- */
 @media (max-width: 768px) {
     h1 { font-size: 1.8rem; }
@@ -297,4 +299,35 @@ h1 strong { color: var(--color-dark); }
     h1 { font-size: 1.5rem; }
     .advantages-list { flex-direction: column; align-items: stretch; gap: 10px; }
     .advantage-point { flex-basis: auto; box-sizing: border-box; }
+
+    /* --- NOUVEAU : Correction du Pop-up Mobile --- */
+    .chat-modal {
+        /* On ne le met plus en plein écran */
+        width: auto;
+        height: auto;
+        
+        /* On laisse de l'espace (le bug de l'iPhone) */
+        top: 10px;
+        left: 10px;
+        right: 10px;
+        bottom: 10px; /* Espace crucial en bas */
+
+        /* On lui donne un style de "carte" */
+        border-radius: 16px;
+        box-shadow: 0 5px 30px rgba(0,0,0,0.15);
+        overflow: hidden; /* Pour que les enfants respectent le border-radius */
+    }
+    
+    /* Assure que le header a le bon radius en haut */
+    .chat-header {
+        border-top-left-radius: 16px;
+        border-top-right-radius: 16px;
+    }
+    
+    /* Assure que le footer a le bon radius en bas */
+    .chat-footer {
+        border-bottom-left-radius: 16px;
+        border-bottom-right-radius: 16px;
+    }
+    /* --- FIN DE LA CORRECTION --- */
 }
