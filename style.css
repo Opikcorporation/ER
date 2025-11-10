@@ -31,7 +31,7 @@ body {
     font-weight: 400;
 }
 
-/* CORRECTION BUG SCROLL IPHONE */
+/* Classe pour bloquer le scroll */
 body.modal-open {
     overflow: hidden;
 }
@@ -113,7 +113,7 @@ h1 strong { color: var(--color-dark); }
 
 /* --- 6. POP-UP DE CHAT --- */
 
-/* Style plein écran (pour mobile) */
+/* C'est le style pour ordinateur : centré, comme un pop-up normal */
 .chat-modal {
     display: none; 
     position: fixed;
@@ -121,20 +121,18 @@ h1 strong { color: var(--color-dark); }
     font-family: var(--font-body);
     flex-direction: column;
     
-    /* Plein écran */
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
+    /* Centré sur ordinateur */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90vw; /* 90% de la largeur */
+    max-width: 440px; /* Largeur max type mobile */
+    max-height: 90vh; /* 90% de la hauteur max */
     
     background-color: var(--color-chat-bg); /* FOND BLANC */
-    
-    /* Annule les styles "carte" d'ordinateur */
-    border-radius: 0;
-    box-shadow: none;
-    max-width: none;
-    max-height: none;
-    transform: none;
+    border-radius: 16px;
+    box-shadow: 0 5px 30px rgba(0,0,0,0.15);
+    overflow: hidden; /* Important */
 }
 
 .chat-header {
@@ -240,98 +238,4 @@ h1 strong { color: var(--color-dark); }
     background: var(--color-chat-user); /* FOND NOIR */
     border-radius: 50px;
     cursor: pointer;
-    font-weight: 600;
-    font-size: 0.9rem;
-    font-family: var(--font-body);
-    transition: all 0.2s ease;
-}
-.chat-footer .chat-radio-group button:hover {
-    opacity: 0.8;
-}
-
-/* Zone pour l'input texte (style N&B) */
-.chat-footer .text-answer-group {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-.chat-footer .chat-input {
-    flex-grow: 1;
-    padding: 12px 20px;
-    border: 1px solid var(--color-chat-receiver-bg); /* Bordure grise */
-    background-color: var(--color-chat-receiver-bg); /* Fond gris */
-    border-radius: 50px;
-    
-    /* CORRECTION BUG ZOOM IPHONE */
-    font-size: 16px; 
-    
-    font-family: var(--font-body);
-}
-.chat-footer .text-send-btn {
-    background-color: var(--color-chat-user); /* BOUTON NOIR */
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 44px;
-    height: 44px;
-    font-size: 1.1rem;
-    cursor: pointer;
-    flex-shrink: 0;
-}
-
-.chat-footer .error-message {
-    color: #D32F2F;
-    font-size: 0.8rem;
-    font-weight: 600;
-    text-align: left;
-    margin-top: 8px;
-    display: none;
-}
-
-/* --- Styles pour le chargement et Agenda --- */
-.message.system {
-    max-width: 100%;
-    /* text-align: center; -- Remplacé par Flexbox */
-    font-weight: 600;
-    color: var(--color-text-secondary);
-    
-    /* MODIFICATION 1 : Centrage parfait */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.message.system .fa-spinner {
-    animation: fa-spin 1.5s linear infinite;
-    /* MODIFICATION 2 : Espace */
-    margin-right: 10px;
-}
-.message.system.success {
-    color: var(--color-chat-success);
-    font-family: var(--font-heading);
-    font-size: 1.1rem;
-}
-.message.system.success .fa-check-circle {
-    margin-right: 8px;
-}
-
-/* --- Responsive Design --- */
-@media (max-width: 768px) {
-    h1 { font-size: 1.8rem; }
-    .capture-box h2 { font-size: 1.1rem; }
-}
-
-/* Sur ordinateur (plus de 480px), on remet le style "carte" */
-@media (min-width: 481px) {
-    .chat-modal {
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 90vw;
-        max-width: 440px;
-        height: auto; /* Hauteur auto sur ordi */
-        max-height: 90vh; /* Hauteur max */
-        
-        border-radius: 16px;
-        box-shadow: 0 5px 30px rgba(0,0,0,0.15);
-    }
-}
+    font-weight: 60
