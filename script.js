@@ -82,7 +82,8 @@ const questions = [
         ]
     },
     {
-        text: "Merci pour toutes tes réponses ! 🙏<br>Ton formulaire est complet, l'équipe va l'étudier et te recontacter très vite.",
+        // C'est l'avant-dernière étape, qui déclenche la soumission
+        text: "Merci pour toutes tes réponses ! 🙏<br>Ton formulaire est complet, l'équipe va l'étudier...",
         type: "final"
     }
 ];
@@ -121,7 +122,10 @@ function resetChat() {
 
 // Fait défiler le chat vers le bas
 function scrollToBottom() {
-    chatBody.scrollTop = chatBody.scrollHeight;
+    // Ajoute un léger délai pour que le DOM se mette à jour
+    setTimeout(() => {
+        chatBody.scrollTop = chatBody.scrollHeight;
+    }, 100);
 }
 
 // Affiche la question de Sophie
@@ -179,7 +183,8 @@ function askQuestion(index) {
         });
         
     } else if (question.type === "final") {
-        chatInputArea.innerHTML = '<p style="text-align: center; color: #999;">Conversation terminée.</p>';
+        // C'est la fin, on lance la séquence de soumission
+        chatInputArea.innerHTML = '';
         submitForm();
     }
     
@@ -241,6 +246,8 @@ function showError(message) {
     }
 }
 
+// --- NOUVELLE SÉQUENCE DE FIN ---
+
 function submitForm() {
     console.log("Données du formulaire prêtes à être soumises :");
     const formData = new FormData(hiddenForm);
@@ -248,6 +255,68 @@ function submitForm() {
         console.log(key, ':', value);
     }
     
-    // Pour soumettre, décommentez la ligne suivante :
-    // hiddenForm.submit();
+    // Envoi des données en arrière-plan (décommentez pour la production)
+    /*
+    fetch(hiddenForm.action, {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => console.log('Soumission réussie:', data))
+    .catch(error => console.error('Erreur de soumission:', error));
+    */
+    
+    // Démarre la séquence d'animation
+    setTimeout(showLoading, 500);
+}
+
+function showLoading() {
+    const loadingMessage = document.createElement('div');
+    loadingMessage.classList.add('message', 'system');
+    loadingMessage.innerHTML = `
+        <i class="fas fa-spinner fa-spin"></i> Analyse de votre profil en cours...
+    `;
+    chatBody.appendChild(loadingMessage);
+    scrollToBottom();
+    
+    // Simule une analyse de 2.5 secondes
+    setTimeout(() => {
+        loadingMessage.remove(); // Supprime le message de chargement
+        showSuccess();
+    }, 2500);
+}
+
+function showSuccess() {
+    const successMessage = document.createElement('div');
+    successMessage.classList.add('message', 'system', 'success');
+    successMessage.innerHTML = `
+        <i class="fas fa-check-circle"></i> Profil accepté !
+    `;
+    chatBody.appendChild(successMessage);
+    scrollToBottom();
+    
+    // Laisse le temps de lire le message
+    setTimeout(showGoogleCalendar, 1500); // MISE À JOUR : Appel de la nouvelle fonction
+}
+
+// MISE À JOUR : Renommée de showCalendly en showGoogleCalendar
+function showGoogleCalendar() {
+    // Message d'accompagnement
+    const googleIntro = document.createElement('div');
+    googleIntro.classList.add('message');
+    googleIntro.innerHTML = `
+        <img src="https://i.imgur.com/G1fWXfK.png" alt="Sophie" class="avatar">
+        <div class="bubble">Félicitations ! Tu peux réserver ton rendez-vous directement ici 👇</div>
+    `;
+    chatBody.appendChild(googleIntro);
+
+    // Embed Google Calendar
+    const googleCalendarEmbed = document.createElement('iframe');
+    googleCalendarEmbed.classList.add('calendly-embed'); // On garde la même classe CSS
+    
+    // ⚠️ MISE À JOUR : Remplacement du lien
+    googleCalendarEmbed.src = "https://calendar.app.google/v2gKU8buxz5fyNqq9"; 
+    
+    chatBody.appendChild(googleCalendarEmbed);
+    scrollToBottom();
 }
