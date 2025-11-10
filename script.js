@@ -95,11 +95,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     openButton.addEventListener('click', () => {
         chatModal.style.display = 'flex';
+        document.body.style.overflow = 'hidden'; // <-- NOUVELLE LIGNE : Bloque le scroll
         startChat();
     });
 
     closeButton.addEventListener('click', () => {
         chatModal.style.display = 'none';
+        document.body.style.overflow = ''; // <-- NOUVELLE LIGNE : Réactive le scroll
         resetChat(); // Réinitialise le chat si on ferme
     });
 });
@@ -299,7 +301,7 @@ function showSuccess() {
     setTimeout(showGoogleCalendar, 1500);
 }
 
-// MISE À JOUR : Message final plus persuasif
+// MISE À JOUR : Crée un lien-texte au lieu d'un bouton/iframe
 function showGoogleCalendar() {
     // Message d'accompagnement final
     const googleIntro = document.createElement('div');
