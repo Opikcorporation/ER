@@ -255,8 +255,8 @@ h1 strong { color: var(--color-dark); }
     background-color: var(--color-chat-receiver-bg); /* Fond gris */
     border-radius: 50px;
     
-    /* Police originale (qui cause le zoom) */
-    font-size: 0.9rem; 
+    /* CORRECTION BUG ZOOM IPHONE */
+    font-size: 16px; 
     
     font-family: var(--font-body);
 }
@@ -312,16 +312,19 @@ h1 strong { color: var(--color-dark); }
     .advantages-list { flex-direction: column; align-items: stretch; gap: 10px; }
     .advantage-point { flex-basis: auto; box-sizing: border-box; }
 
-    /* --- Pop-up style "carte" (v20) --- */
+    /* --- CORRECTION DU POP-UP MOBILE --- */
     .chat-modal {
-        top: 20px;
-        left: 10px;
-        right: 10px;
-        transform: none;
+        /* On ne centre plus, on ancre en haut */
+        top: 15px; /* Marge en haut (réduite) */
+        left: 15px; /* Marge latérale (augmentée) */
+        right: 15px; /* Marge latérale (augmentée) */
+        transform: none; /* Annule le centrage */
 
-        max-height: 85vh;
+        /* On ne s'ancre PAS en bas */
+        /* On définit une HAUTEUR MAXIMALE */
+        max-height: 80vh; /* Laisse 20% d'espace en bas (réduit) */
         
-        width: auto;
-        max-width: none;
+        width: auto; /* La largeur est gérée par left/right */
+        max-width: none; /* Annule la largeur max d'ordinateur */
     }
 }
